@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import styles from './style.module.scss';
 
-const RangeInput = ({ name, min=0, max=1, ...props }) => {
-    const [value, setValue] = useState(0);
-
+const RangeInput = ({
+                        name, min = 0, max = 1, value,
+                        onChange, ...props
+                    }) => {
     return (
         <div className={styles.rangeInputWrapper}
              style={{
@@ -16,7 +17,7 @@ const RangeInput = ({ name, min=0, max=1, ...props }) => {
                    min={min}
                    max={max}
                    value={value}
-                   onChange={e => setValue(e.target.value)}
+                   onChange={onChange}
                    {...props}
             />
         </div>
