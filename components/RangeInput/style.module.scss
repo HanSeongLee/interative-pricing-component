@@ -36,6 +36,7 @@
       background-image: url("/icons/icon-slider.svg");
       background-repeat: no-repeat;
       background-position: center;
+      cursor: pointer;
     }
 
     &::-moz-range-thumb {
@@ -51,6 +52,7 @@
       background-image: url("/icons/icon-slider.svg");
       background-repeat: no-repeat;
       background-position: center;
+      cursor: pointer;
     }
   }
 }
