@@ -1,0 +1,11 @@
+.featureItem {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  color: #848EAD;
+
+  &:before {
+    content: url("/icons/icon-check.svg");
+    margin-right: 16px;
+  }
+}
