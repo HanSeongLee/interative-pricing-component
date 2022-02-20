@@ -37,5 +37,20 @@
       background-repeat: no-repeat;
       background-position: center;
     }
+
+    &::-moz-range-thumb {
+      position: relative;
+      -webkit-appearance: none !important;
+      z-index: 1;
+      width: 40px;
+      height: 40px;
+      box-shadow: 0px 15px 30px rgba(0, 255, 231, 0.6);
+      border: none;
+      border-radius: 50%;
+      background-color: #10D8C4;
+      background-image: url("/icons/icon-slider.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
   }
 }
