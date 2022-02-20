@@ -21,19 +21,19 @@
     position: relative;
     background: transparent;
     height: 8px;
-    appearance: none;
     -webkit-appearance: none;
 
     &::-webkit-slider-thumb {
       position: relative;
-      appearance: none;
       -webkit-appearance: none;
       width: 40px;
       height: 40px;
       box-shadow: 0px 15px 30px rgba(0, 255, 231, 0.6);
       border: none;
       border-radius: 50%;
-      background: #10D8C4 url("/icons/icon-slider.svg") no-repeat;
+      background-color: #10D8C4;
+      background-image: url("/icons/icon-slider.svg");
+      background-repeat: no-repeat;
       background-position: center;
     }
   }
