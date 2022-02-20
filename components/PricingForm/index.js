@@ -1,8 +1,8 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import styles from './style.module.scss';
 import RangeInput from "../RangeInput";
 import ToggleButton from "../ToggleButton";
-import { useForm, Controller } from 'react-hook-form';
+import {Controller, useForm} from 'react-hook-form';
 import FeatureContainer from "../../containers/FeatureContainer";
 
 const PricingForm = ({ onSubmit, priceTable, yearlyDiscount }) => {
@@ -26,17 +26,19 @@ const PricingForm = ({ onSubmit, priceTable, yearlyDiscount }) => {
                 <p className={styles.pageviews}>
                     {`${formatter.format(priceTable[type].pageViews)} PAGEVIEWS`}
                 </p>
-                <Controller name={'type'}
-                            control={control}
-                            defaultValue={'3'}
-                            render={({field}) => (
-                                <RangeInput name={'type'}
-                                            min={0}
-                                            max={6}
-                                            {...field}
-                                />
-                            )}
-                />
+                <div className={styles.controller}>
+                    <Controller name={'type'}
+                                control={control}
+                                defaultValue={'3'}
+                                render={({field}) => (
+                                    <RangeInput name={'type'}
+                                                min={0}
+                                                max={6}
+                                                {...field}
+                                    />
+                                )}
+                    />
+                </div>
                 <div className={styles.priceContainer}>
                     <span className={styles.price}>
                         ${monthlyBilling()}&nbsp;
@@ -56,7 +58,9 @@ const PricingForm = ({ onSubmit, priceTable, yearlyDiscount }) => {
                     />
                     <span className={styles.yearlyBillingLabel}>
                         Yearly Billing
-                        <span className={styles.discountLabel}>-25%</span>
+                        <span className={styles.discountLabel}
+                              data-value={yearlyDiscount}
+                        ></span>
                     </span>
                 </div>
             </div>
