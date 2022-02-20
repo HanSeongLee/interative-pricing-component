@@ -1,22 +1,45 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import styles from './style.module.scss';
 import RangeInput from "../RangeInput";
 import ToggleButton from "../ToggleButton";
+import { useForm, Controller } from 'react-hook-form';
+import FeatureContainer from "../../containers/FeatureContainer";
 
-const PricingForm = () => {
+const PricingForm = ({ onSubmit, priceTable, yearlyDiscount }) => {
+    const { control, handleSubmit, watch } = useForm();
+    const type = Number(watch('type', 0));
+    const yearlyBilling = watch('yearlyBilling', false);
+    const formatter = Intl.NumberFormat('en', { notation: 'compact' });
+
+    const monthlyBilling = () => {
+        const price = priceTable[type].price;
+        const discount = yearlyBilling ? (price * (yearlyDiscount / 100)) : 0;
+        const monthlyPrice = price - discount;
+        return monthlyPrice.toFixed(2);
+    };
+
     return (
-        <form className={styles.form}>
+        <form className={styles.form}
+              onSubmit={handleSubmit(onSubmit)}
+        >
             <div className={styles.body}>
                 <p className={styles.pageviews}>
-                    100K PAGEVIEWS
+                    {`${formatter.format(priceTable[type].pageViews)} PAGEVIEWS`}
                 </p>
-                <RangeInput name={'type'}
-                            min={0}
-                            max={6}
+                <Controller name={'type'}
+                            control={control}
+                            defaultValue={'3'}
+                            render={({field}) => (
+                                <RangeInput name={'type'}
+                                            min={0}
+                                            max={6}
+                                            {...field}
+                                />
+                            )}
                 />
                 <div className={styles.priceContainer}>
                     <span className={styles.price}>
-                        $16.00&nbsp;
+                        ${monthlyBilling()}&nbsp;
                     </span>
                     <span className={styles.period}>
                         / month
@@ -24,7 +47,13 @@ const PricingForm = () => {
                 </div>
                 <div className={styles.billingContainer}>
                     <span>Monthly Billing</span>
-                    <ToggleButton name={'period'} />
+                    <Controller name={'yearlyBilling'}
+                                control={control}
+                                defaultValue={false}
+                                render={({field}) => (
+                                    <ToggleButton {...field} />
+                                )}
+                    />
                     <span className={styles.yearlyBillingLabel}>
                         Yearly Billing
                         <span className={styles.discountLabel}>-25%</span>
@@ -32,17 +61,9 @@ const PricingForm = () => {
                 </div>
             </div>
             <div className={styles.footer}>
-                <ul className={styles.featureContainer}>
-                    <li className={styles.featureItem}>
-                        Unlimited websites
-                    </li>
-                    <li className={styles.featureItem}>
-                        100% data ownership
-                    </li>
-                    <li className={styles.featureItem}>
-                        Email reports
-                    </li>
-                </ul>
+                <FeatureContainer className={styles.featureContainer}
+                                  items={priceTable[type]?.options}
+                />
 
                 <button className={styles.submitButton}
                         type={'submit'}
