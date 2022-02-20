@@ -21,11 +21,11 @@
     position: relative;
     background: transparent;
     height: 8px;
-    -webkit-appearance: none;
+    -webkit-appearance: none !important;
 
     &::-webkit-slider-thumb {
       position: relative;
-      -webkit-appearance: none;
+      -webkit-appearance: none !important;
       width: 40px;
       height: 40px;
       box-shadow: 0px 15px 30px rgba(0, 255, 231, 0.6);
