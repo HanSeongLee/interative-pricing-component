@@ -7,7 +7,7 @@ import FeatureContainer from "../../containers/FeatureContainer";
 
 const PricingForm = ({ onSubmit, priceTable, yearlyDiscount }) => {
     const { control, handleSubmit, watch } = useForm();
-    const type = Number(watch('type', 0));
+    const type = Number(watch('type', 3));
     const yearlyBilling = watch('yearlyBilling', false);
     const formatter = Intl.NumberFormat('en', { notation: 'compact' });
 
