@@ -18,6 +18,7 @@ const RangeInput = ({
                    max={max}
                    value={value}
                    onChange={onChange}
+                   aria-label={name}
                    {...props}
             />
         </div>
