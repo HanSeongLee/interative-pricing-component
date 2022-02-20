@@ -1,3 +1,5 @@
+@import "styles/utils";
+
 .rangeInputWrapper {
   position: relative;
   display: flex;
@@ -23,7 +25,22 @@
     height: 8px;
     -webkit-appearance: none !important;
 
-    &::-webkit-slider-thumb {
+    &.drag {
+      @mixin drag {
+        background-color: #24AEA1 !important;
+        cursor: grabbing;
+      }
+
+      &::-webkit-slider-thumb  {
+        @include drag;
+      }
+
+      &::-moz-range-thumb {
+        @include drag;
+      }
+    }
+
+    @mixin slider-thumb {
       position: relative;
       -webkit-appearance: none !important;
       z-index: 1;
@@ -37,22 +54,22 @@
       background-repeat: no-repeat;
       background-position: center;
       cursor: pointer;
+
+      @include media(">desktop") {
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: #7AEADF;
+        }
+      }
+    }
+
+    &::-webkit-slider-thumb {
+      @include slider-thumb;
     }
 
     &::-moz-range-thumb {
-      position: relative;
-      -webkit-appearance: none !important;
-      z-index: 1;
-      width: 40px;
-      height: 40px;
-      box-shadow: 0px 15px 30px rgba(0, 255, 231, 0.6);
-      border: none;
-      border-radius: 50%;
-      background-color: #10D8C4;
-      background-image: url("/icons/icon-slider.svg");
-      background-repeat: no-repeat;
-      background-position: center;
-      cursor: pointer;
+      @include slider-thumb;
     }
   }
 }
