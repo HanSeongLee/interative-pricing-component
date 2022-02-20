@@ -1,0 +1,46 @@
+@import "styles/utils";
+
+.toggleButton {
+  position: relative;
+  width: 43px;
+  height: 22px;
+  background: #CFD8EF;
+  border-radius: 15px;
+  appearance: none;
+  cursor: pointer;
+
+  @mixin hover {
+    @include media(">desktop") {
+      transition: background 0.3s;
+
+      &:hover {
+        background: #7AEADF;
+      }
+    }
+  }
+
+  @include hover;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 14px;
+    height: 14px;
+    background: #FFFFFF;
+    margin: 4px;
+    border-radius: 50%;
+    content: "";
+    transition: 0.3s;
+  }
+
+  &:checked {
+    background: #10D8C4;
+    @include hover;
+
+    &::before {
+      transform: translateX(21px);
+    }
+  }
+}
